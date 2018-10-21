@@ -1,0 +1,24 @@
+---
+- name: POC Item 3 Start Stop Restart Service on RHEL
+  hosts: all
+  vars:
+    rhel_service: crond
+    operation: null
+  tasks:
+  - name: Start RHEL service
+    service:
+      name: "{{ rhel_service }}"
+      state: started
+    when: operation == "Start"
+
+  - name: Stop RHEL service
+    service:
+      name: "{{ rhel_service }}"
+      state: stopped
+    when: operation == "Stop"
+
+  - name: Restart RHEL service
+    service:
+      name: "{{ rhel_service }}"
+      state: restarted
+    when: operation == "Restart"
