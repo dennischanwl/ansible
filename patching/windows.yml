@@ -1,0 +1,20 @@
+---
+- name: Windows Patch Install
+  hosts: windows
+  tasks:
+  - name: Stop Windows Service
+    win_service:
+      name: VSS
+      state: stopped
+  - name: Install Patch
+    win_hotfix:
+      source: C:\KB2937592.msu
+      hotfix_kb: KB2937592
+      state: present
+    register: hotfix_install
+  - win_reboot:
+    when: hotfix_install.reboot_required
+  - name: Restart Windows Service
+    win_service:
+      name: VSS
+      state: started
