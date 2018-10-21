@@ -1,0 +1,26 @@
+---
+- hosts: WebServers
+  vars:
+    src_file: "http://192.168.122.30/static/index.html.j2"
+    dst_file: "C:\\inetpub\\wwwroot\\index.html"
+
+  tasks:
+  - name: Install IIS
+    win_feature:
+      name: "Web-Server"
+      state: present
+      restart: no
+      include_sub_features: yes
+      include_management_tools: yes
+  - name: Download and install website_template
+    win_get_url:
+      url: "{{ src_file }}"
+      dest: "{{ dst_file }}"
+      force: yes
+      skip_certificate_validation: true
+
+  - name: Create Registry Key
+    win_regedit:
+      key: HKCU:\Software\myCompany
+      value: hello
+      data: world
