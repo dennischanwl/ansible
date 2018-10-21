@@ -1,0 +1,32 @@
+---
+- name: test playbook
+  hosts: control
+
+  tasks:
+
+    - shell: grep si /etc/motd
+      ignore_errors: yes
+      register: motd_result
+
+    - shell: echo "motd contains the word si"
+      when: motd_result.rc == 0
+
+    # alternatively:
+
+    - shell: echo "motd contains the word si"
+      when: motd_result.stdout.find('si') != -1
+
+    # or also:
+
+    - shell: echo "motd contains word si"
+      when: "'si' in motd_result.stdout"
+
+    # you can use 'stdout_lines' to loop over the registered output lines
+    - name: motd lines matching 'si'
+      shell: echo "{{ item }}"
+      with_items: motd_result.stdout_lines
+
+    # you can also split 'stdout' yourself
+    - name: motd lines matching 'si'
+      shell: echo "{{ item }}"
+      with_items: motd_result.stdout.split('\n')
