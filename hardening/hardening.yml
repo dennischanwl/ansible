@@ -1,0 +1,18 @@
+---
+- name: POC Item 2 Hardening
+  hosts: all
+  tasks:
+    - name: Ensure AIDE is installed
+      yum:
+         name: aide
+         state: present
+      ignore_errors: True
+
+    - name: Ensure permissions on /etc/motd are configured
+      file:
+         dest: /etc/motd
+         state: file
+         owner: root
+         group: root
+         mode: 0644
+
