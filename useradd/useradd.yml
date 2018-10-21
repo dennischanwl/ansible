@@ -1,0 +1,18 @@
+---
+- name: POC Item 7 Add User
+  hosts: all
+  vars:
+     uusername: null
+     upassword: null
+     cpassword: null
+  tasks:
+    - name: Check Password
+      fail:
+         msg: "Password not match!"
+      when: upassword != cpassword
+
+    - name: Add User
+      user:
+         name: "{{ uusername }}"
+         password: "{{ upassword | password_hash('sha512') }}"
+
