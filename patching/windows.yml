@@ -4,17 +4,17 @@
   tasks:
   - name: Download Patch
     win_get_url:
-      url: https://download.microsoft.com/download/7/D/0/7D05B8C7-EBA4-452C-9220-B5ED46DE275D/IE11-Windows6.1-KB3003057-x86.msu
-      dest: C:\KB2937592.msu
+      url: http://download.windowsupdate.com/d/msdownload/update/software/secu/2019/08/windows8.1-kb4512489-x64_be2ed8f4ee800d8c39e5025c5d95808858077c05.msu
+      dest: C:\Windows8.1-kb4512489-x64-2012R2.msu
   - name: Stop Windows Service
     win_service:
       name: VSS
       state: stopped
   - name: Install Patch
     win_hotfix:
-      source: C:\KB2937592.msu
-      hotfix_kb: KB2937592
-      state: absent
+      source: C:\Windows8.1-kb4512489-x64-2012R2.msu
+      hotfix_kb: KB4512489
+      state: present
     register: hotfix_install
   - win_reboot:
     when: hotfix_install.reboot_required
