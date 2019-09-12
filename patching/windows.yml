@@ -4,7 +4,7 @@
   tasks:
   - name: Download Patch
     win_get_url:
-      url: http://download.microsoft.com/download/D/B/1/DB1F29FC-316D-481E-B435-1654BA185DCF/Windows8.1-KB2937592-x64.msu
+      url: https://download.microsoft.com/download/7/D/0/7D05B8C7-EBA4-452C-9220-B5ED46DE275D/IE11-Windows6.1-KB3003057-x86.msu
       dest: C:\KB2937592.msu
   - name: Stop Windows Service
     win_service:
