@@ -4,16 +4,16 @@
   tasks:
   - name: Download Patch
     win_get_url:
-      url: http://download.windowsupdate.com/c/msdownload/update/software/secu/2019/08/windows8.1-kb4512488-x64_d5a1a3f96004791981bf0d469e724fb97be4377d.msu
-      dest: C:\Windows8.1-kb4512488-x64-2012R2.msu
+      url: http://download.windowsupdate.com/c/msdownload/update/software/secu/2019/09/windows8.1-kb4516067-x64_cea63653326697b8aca38b2c8861f62971bc437b.msu
+      dest: C:\Windows8.1-kb4516067-x64-2012R2.msu
   - name: Stop Windows Service
     win_service:
       name: VSS
       state: stopped
   - name: Install Patch
     win_hotfix:
-      source: C:\Windows8.1-kb4512488-x64-2012R2.msu
-      hotfix_kb: KB4512488
+      source: C:\Windows8.1-kb4516067-x64-2012R2.msu
+      hotfix_kb: KB4516067
       state: present
     register: hotfix_install
   - win_reboot:
