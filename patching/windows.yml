@@ -2,6 +2,18 @@
 - name: Windows Patch Install
   hosts: windows
   tasks:
+ # - name: Create a snapshot
+ #   vmware_guest_snapshot:
+ #     hostname: "{{ vcenter_hostname }}"
+ #     username: "{{ vcenter_username }}"
+ #     password: "{{ vcenter_password }}"
+ #     datacenter: "{{ datacenter_name }}"
+ #     folder: "/{{ datacenter_name }}/vm/"
+ #     name: "{{ guest_name }}"
+ #     state: present
+ #     snapshot_name: snap1
+ #     description: snap1_description
+ #   delegate_to: localhost
   - name: Download Patch
     win_get_url:
       url: http://download.windowsupdate.com/c/msdownload/update/software/secu/2019/09/windows8.1-kb4516067-x64_cea63653326697b8aca38b2c8861f62971bc437b.msu
