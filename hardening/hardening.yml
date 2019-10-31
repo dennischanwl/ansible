@@ -1,8 +1,6 @@
 ---
 - name: POC Item 2 Hardening
   hosts: all
-  vars:
-    var_password_pam_minlen = 9
   tasks:
     - name: Ensure AIDE is installed
       yum:
@@ -23,4 +21,4 @@
         create: true
         dest: /etc/security/pwquality.conf
         regexp: ^#?\s*minlen
-        line: minlen = {{ var_password_pam_minlen }}
+        line: minlen = 9
