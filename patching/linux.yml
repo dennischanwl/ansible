@@ -20,7 +20,7 @@
       state: stopped
   - name: Install Patch
     yum:
-      name: *
+      name: "*"
       state: latest
   - name: Restart RHEL Service
     service:
