@@ -21,4 +21,4 @@
         create: true
         dest: /etc/security/pwquality.conf
         regexp: ^#?\s*minlen
-        line: minlen = 6
+        line: minlen = 3
