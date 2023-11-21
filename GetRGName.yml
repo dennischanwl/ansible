@@ -1,5 +1,7 @@
 - name: Get VM information
   hosts: localhost
+  environment:
+    AZURE_SUBSCRIPTION_ID: "{{ azure_sub_id }}"
   tasks:
     - name: Get facts by Virtual Machine name
       azure_rm_virtualmachine_info:
