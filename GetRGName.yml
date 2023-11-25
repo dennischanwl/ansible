@@ -13,12 +13,12 @@
     - name: Set Subscription ID
       shell: az account set -s {{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}
 
-    - name: Get facts by resource name
-      shell: az backup protection check-vm --resource-group dchan-rg --vm vm30
+    - name: Get facts by backup protection
+      shell: az backup protection check-vm --resource-group "{{ rg_name }}" --vm "{{ vm_name }}"
       register: vm_r_info
     - name: Print
       debug:
-       var: vm_r_info
+       var: vm_backup_info
        
     - name: Get facts by Virtual Machine name
       azure_rm_virtualmachine_info:
