@@ -9,7 +9,10 @@
 
     - name: Azure Login
       shell: az login --service-principal -u {{ lookup('ansible.builtin.env', 'AZURE_CLIENT_ID') }} -p {{ lookup('ansible.builtin.env', 'AZURE_SECRET') }} --tenant {{ lookup('ansible.builtin.env', ' AZURE_TENANT') }}
-        
+
+    - name: Set Subscription ID
+      shell: az account set -s {{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}
+
     - name: Get facts by resource name
       shell: az backup protection check-vm --resource-group dchan-rg --vm vm30
       register: vm_r_info
