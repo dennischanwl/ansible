@@ -3,19 +3,9 @@
   environment:
     AZURE_SUBSCRIPTION_ID: "{{ azure_sub_id }}"
   tasks:
-    - name: Create the YUM repository (RedHat)
-      yum_repository:
-        name: "azure-cli"
-        description: "Microsoft Azure CLI"
-        baseurl: "https://packages.microsoft.com/yumrepos/azure-cli"
-        gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
-        gpgcheck: yes
-        enabled: yes
 
     - name: Install the application package (RedHat)
-      package:
-        name: "azure-cli"
-        state: present
+      shell: pip install azure-cli
 
     - name: Verify installed version
       shell: az --version
