@@ -5,7 +5,7 @@
   tasks:
     - name: Get facts by resource name
       azure_rm_resource_info:
-        name: "{{ vm_name }}"
+        resource_name: "{{ vm_name }}"
         resource_group: "{{ rg_name }}"
       register: vm_r_info
     - name: Print
