@@ -3,6 +3,15 @@
   environment:
     AZURE_SUBSCRIPTION_ID: "{{ azure_sub_id }}"
   tasks:
+    - name: Get facts by resource name
+      azure_rm_resource_info:
+        name: "{{ vm_name }}"
+        resource_group: "{{ rg_name }}"
+      register: vm_r_info
+    - name: Print
+      debug:
+       var: vm_r_info
+       
     - name: Get facts by Virtual Machine name
       azure_rm_virtualmachine_info:
         name: "{{ vm_name }}"
