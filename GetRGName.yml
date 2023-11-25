@@ -3,6 +3,21 @@
   environment:
     AZURE_SUBSCRIPTION_ID: "{{ azure_sub_id }}"
   tasks:
+    - name: Create local azure-cli repository information
+      shell: sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
+
+    - name: Install Azure CLi
+      package:
+        name: "azure-cli"
+        state: present
+
+    - name: Verify installed version
+      shell: az --version
+      register: azureVersion
+
+    - debug:
+        msg: "{{azureVersion.stdout}}"  
+        
     - name: Get facts by resource name
       shell: az backup protection check-vm --resource-group dchan-rg --vm vm30
       register: vm_r_info
