@@ -4,8 +4,7 @@
     AZURE_SUBSCRIPTION_ID: "{{ azure_sub_id }}"
   tasks:
     - name: Get facts by resource name
-      azure_rm_manageddisk_info:
-        resource_group: "{{ rg_name }}"
+      shell: az backup protection check-vm --resource-group dchan-rg --vm vm30
       register: vm_r_info
     - name: Print
       debug:
