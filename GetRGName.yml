@@ -11,7 +11,7 @@
       shell: az login --service-principal -u {{ lookup('ansible.builtin.env', 'AZURE_CLIENT_ID') }} -p {{ lookup('ansible.builtin.env', 'AZURE_SECRET') }} --tenant {{ lookup('ansible.builtin.env', ' AZURE_TENANT') }}
 
     - name: Set Subscription ID
-      shell: az account set -s {{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}
+      shell: az account set -s "{{ azure_sub_id }}"
 
     - name: Get facts by backup protection
       shell: az backup protection check-vm --resource-group "{{ rg_name }}" --vm "{{ vm_name }}"
