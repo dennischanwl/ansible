@@ -3,11 +3,17 @@
   environment:
     AZURE_SUBSCRIPTION_ID: "{{ azure_sub_id }}"
   tasks:
-    - name: Create local azure-cli repository information
-      shell: sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
+    - name: Create the YUM repository (RedHat)
+      yum_repository:
+        name: "azure-cli"
+        description: "Microsoft Azure CLI"
+        baseurl: "https://packages.microsoft.com/yumrepos/azure-cli"
+        gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
+        gpgcheck: yes
+        enabled: yes
 
-    - name: Install Azure CLi
-      yum:
+    - name: Install the application package (RedHat)
+      package:
         name: "azure-cli"
         state: present
 
