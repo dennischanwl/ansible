@@ -22,5 +22,5 @@
 
     - name: Get Recovery Vault Name
       set_fact:
-        recovery_vault_name: "{{ vm_r_info.stdout | split('/') | last }}"
+        recovery_vault_name: "{{ vm_r_info.split('/') | last }}"
       when: vm_r_info.stdout is defined
