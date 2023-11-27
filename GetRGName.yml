@@ -45,7 +45,11 @@
         return_content: yes
       register: vault_info_response
 
-    - name: Vault Name
-      debug:
-        var: "{{ (vault_info_response.json | default({})).value | default([]) | selectattr('properties.virtualMachines', 'contains', vm_name) | first }}"
+    - set_fact:
+        vaults: "{{ (vault_info_response.json | default({})).value | default([]) }}"
+
+    # Additional logic to find the specific vault associated with the VM
+    # Example:
+    - set_fact:
+        specific_vault: "{{ vaults | selectattr('properties.virtualMachines', 'contains', vm_name) | first }}"
     
