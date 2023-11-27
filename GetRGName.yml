@@ -18,27 +18,9 @@
       register: vm_r_info
     - name: Print
       debug:
-       var: vm_backup_info
-       
-    - name: Get facts by Virtual Machine name
-      azure_rm_virtualmachine_info:
-        name: "{{ vm_name }}"
-        resource_group: "{{ rg_name }}"
-      register: vm_info
-    - name: Print
-      debug:
-       var: vm_info
-    
-    - name: Verify Resource group
-      azure_rm_resourcegroup_info:
-        name: "{{ rg_name }}"
-      register: rg
-    
-    - name: Print
-      debug:
-        #msg: "{{ rg.resourcegroups.0.id }}"
-        var: rg.resourcegroups.0.id
+       var: vm_r_info
+
     - name: Get Recovery Vault Name
       set_fact:
-        recovery_vault_name: "{{ vm_info.instance.resources[0].properties.storageProfile.recoveryServicesVaultId | split('/') | last }}"
-      when: vm_info.instance.resources[0].properties.storageProfile.recoveryServicesVaultId is defined
+        recovery_vault_name: "{{ vm_r_info.stdout | split('/') | last }}"
+      when: vm_r_info.stdout is defined
