@@ -18,7 +18,7 @@
       register: vm_r_info
     - name: Print
       debug:
-       var: {{ vm_r_info.stdout | split('/') | last }}
+       var: "{{ vm_r_info.stdout | split('/') | last }}"
 
     - name: Get Recovery Vault Name
       set_fact:
