@@ -44,7 +44,3 @@
         status_code: 200
         return_content: yes
       register: vault_info_response
-
-    - set_fact:
-        vaults: "{{ (vault_info_response.json | default({})).value | default([]) }}"
-    
