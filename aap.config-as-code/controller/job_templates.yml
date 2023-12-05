@@ -1,0 +1,6 @@
+controller_templates:
+ - name: Demo Job Template
+   execution_environment: Default execution environment
+   instance_groups:
+   	- default
+   inventory: Demo Inventory
